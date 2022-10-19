@@ -1,0 +1,769 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Classification Algorithms to Predict Diabetes},
+  pdfauthor={João Victor},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Classification Algorithms to Predict Diabetes}
+\author{João Victor}
+\date{2022-10-19}
+
+\begin{document}
+\maketitle
+
+\hypertarget{load-the-libraries}{%
+\subsubsection{Load the Libraries}\label{load-the-libraries}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages --------------------------------------- tidyverse 1.3.2 --
+## v ggplot2 3.3.6     v purrr   0.3.4
+## v tibble  3.1.8     v dplyr   1.0.9
+## v tidyr   1.2.0     v stringr 1.4.0
+## v readr   2.1.2     v forcats 0.5.1
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(corrplot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## corrplot 0.92 loaded
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(summarytools)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'summarytools'
+## 
+## The following object is masked from 'package:tibble':
+## 
+##     view
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(caTools)}
+\FunctionTok{library}\NormalTok{(caret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Carregando pacotes exigidos: lattice
+## 
+## Attaching package: 'caret'
+## 
+## The following object is masked from 'package:purrr':
+## 
+##     lift
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(e1071)}
+\FunctionTok{library}\NormalTok{(class)}
+\FunctionTok{library}\NormalTok{(rpart)}
+\FunctionTok{library}\NormalTok{(randomForest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## randomForest 4.7-1.1
+## Type rfNews() to see new features/changes/bug fixes.
+## 
+## Attaching package: 'randomForest'
+## 
+## The following object is masked from 'package:dplyr':
+## 
+##     combine
+## 
+## The following object is masked from 'package:ggplot2':
+## 
+##     margin
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(pROC)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Type 'citation("pROC")' for a citation.
+## 
+## Attaching package: 'pROC'
+## 
+## The following objects are masked from 'package:stats':
+## 
+##     cov, smooth, var
+\end{verbatim}
+
+\hypertarget{load-the-dataset}{%
+\subsubsection{Load the dataset}\label{load-the-dataset}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diabetes }\OtherTok{=} \FunctionTok{read.csv}\NormalTok{(}\StringTok{\textquotesingle{}diabetes\_data.csv\textquotesingle{}}\NormalTok{, }\AttributeTok{sep =} \StringTok{\textquotesingle{};\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{first-of-all-lets-analyze-the-structute-of-the-dataset}{%
+\subsubsection{First of all let's analyze the structute of the
+dataset}\label{first-of-all-lets-analyze-the-structute-of-the-dataset}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{str}\NormalTok{(diabetes)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 'data.frame':    520 obs. of  17 variables:
+##  $ age               : int  40 58 41 45 60 55 57 66 67 70 ...
+##  $ gender            : chr  "Male" "Male" "Male" "Male" ...
+##  $ polyuria          : int  0 0 1 0 1 1 1 1 1 0 ...
+##  $ polydipsia        : int  1 0 0 0 1 1 1 1 1 1 ...
+##  $ sudden_weight_loss: int  0 0 0 1 1 0 0 1 0 1 ...
+##  $ weakness          : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ polyphagia        : int  0 0 1 1 1 1 1 0 1 1 ...
+##  $ genital_thrush    : int  0 0 0 1 0 0 1 0 1 0 ...
+##  $ visual_blurring   : int  0 1 0 0 1 1 0 1 0 1 ...
+##  $ itching           : int  1 0 1 1 1 1 0 1 1 1 ...
+##  $ irritability      : int  0 0 0 0 1 0 0 1 1 1 ...
+##  $ delayed_healing   : int  1 0 1 1 1 1 1 0 0 0 ...
+##  $ partial_paresis   : int  0 1 0 0 1 0 1 1 1 0 ...
+##  $ muscle_stiffness  : int  1 0 1 0 1 1 0 1 1 0 ...
+##  $ alopecia          : int  1 1 1 0 1 1 0 0 0 1 ...
+##  $ obesity           : int  1 0 0 0 1 1 0 0 1 0 ...
+##  $ class             : int  1 1 1 1 1 1 1 1 1 1 ...
+\end{verbatim}
+
+\hypertarget{making-the-correlation-matrix}{%
+\subsubsection{Making the Correlation
+Matrix}\label{making-the-correlation-matrix}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{matrix }\OtherTok{=} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\DecValTok{0}\SpecialCharTok{+}\NormalTok{., }\AttributeTok{data =}\NormalTok{ diabetes) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{cor}\NormalTok{(}\AttributeTok{use =} \StringTok{\textquotesingle{}all.obs\textquotesingle{}}\NormalTok{)}
+
+\FunctionTok{corrplot}\NormalTok{(matrix, }\AttributeTok{method =} \StringTok{\textquotesingle{}shade\textquotesingle{}}\NormalTok{,}\AttributeTok{tl.col =} \StringTok{\textquotesingle{}black\textquotesingle{}}\NormalTok{, }\AttributeTok{tl.pos =} \StringTok{\textquotesingle{}lt\textquotesingle{}}\NormalTok{, }\AttributeTok{tl.cex =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{cl.cex =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{number.cex =} \FloatTok{0.7}\NormalTok{, }\AttributeTok{addCoef.col =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Diabetes1_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\hypertarget{excluding-age-and-gender-all-the-variables-have-0-or-1-values.-so-the-strong-number-is-1.}{%
+\paragraph{Excluding Age and Gender, all the variables have 0 or 1
+values. So the ``strong'' number is
+1.}\label{excluding-age-and-gender-all-the-variables-have-0-or-1-values.-so-the-strong-number-is-1.}}
+
+\hypertarget{first-and-easiest-observation-as-a-person-ages-is-most-common-that-this-person-have-presence-of-a-desiase-actually}{%
+\paragraph{First and easiest observation: as a person ages, is most
+common that this person have presence of a desiase
+(actually}\label{first-and-easiest-observation-as-a-person-ages-is-most-common-that-this-person-have-presence-of-a-desiase-actually}}
+
+\hypertarget{some-variables-can-not-be-considered-a-desiase-but-a-condition.}{%
+\paragraph{some variables can not be considered a desiase, but a
+condition).}\label{some-variables-can-not-be-considered-a-desiase-but-a-condition.}}
+
+\hypertarget{second-observation-most-of-the-variables-have-a-positive-correlation-with-the-presence-of-diabetes.}{%
+\paragraph{Second observation: Most of the variables have a positive
+correlation with the presence of
+diabetes.}\label{second-observation-most-of-the-variables-have-a-positive-correlation-with-the-presence-of-diabetes.}}
+
+\hypertarget{it-looks-like-is-more-common-a-female-person-have-diabetes-than-a-male-person.-this-is-valid-for-all-the-disease-in}{%
+\paragraph{It looks like is more common a female person have diabetes
+than a male person. This is valid for all the disease
+in}\label{it-looks-like-is-more-common-a-female-person-have-diabetes-than-a-male-person.-this-is-valid-for-all-the-disease-in}}
+
+\hypertarget{the-data-set.}{%
+\paragraph{the data set.}\label{the-data-set.}}
+
+\hypertarget{make-all-variables-factor-and-exclude-the-age-variable.}{%
+\subsubsection{Make all variables factor and exclude the Age
+variable.}\label{make-all-variables-factor-and-exclude-the-age-variable.}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diabetes }\OtherTok{=}\NormalTok{ diabetes }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{where}\NormalTok{(is.numeric), factor))}
+\NormalTok{diabetes}\SpecialCharTok{$}\NormalTok{age }\OtherTok{=} \ConstantTok{NULL}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{relevel-gender-column}{%
+\subsubsection{Relevel gender column}\label{relevel-gender-column}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{diabetes}\SpecialCharTok{$}\NormalTok{gender }\OtherTok{=} \FunctionTok{factor}\NormalTok{(diabetes}\SpecialCharTok{$}\NormalTok{gender, }\AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Female\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Male\textquotesingle{}}\NormalTok{), }\AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{tables}{%
+\subsection{Tables}\label{tables}}
+
+\hypertarget{the-three-highest-positive-correlation-with-class-is-polyuria-polyidipsia-and-genderfemale.}{%
+\subsubsection{The three highest positive correlation with class is
+`polyuria', `polyidipsia', and
+`genderFemale'.}\label{the-three-highest-positive-correlation-with-class-is-polyuria-polyidipsia-and-genderfemale.}}
+
+\hypertarget{the-two-highest-negative-correlatio-with-class-is-gendermale-and-alopecia.-there-is-only-one-more-variable}{%
+\subsubsection{The two highest negative correlatio with class is
+`genderMale', and `alopecia'. There is only one more
+variable}\label{the-two-highest-negative-correlatio-with-class-is-gendermale-and-alopecia.-there-is-only-one-more-variable}}
+
+\hypertarget{with-negative-correlation-but-your-value-is-only--0.01.-that-variable-is-itching.}{%
+\subsubsection{with negative correlation, but your value is only -0.01.
+That variable is
+`itching'.}\label{with-negative-correlation-but-your-value-is-only--0.01.-that-variable-is-itching.}}
+
+\hypertarget{table-class-vs-gender}{%
+\subsubsection{Table class vs gender}\label{table-class-vs-gender}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ctable}\NormalTok{(diabetes}\SpecialCharTok{$}\NormalTok{class, diabetes}\SpecialCharTok{$}\NormalTok{gender,  }\AttributeTok{dnn =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Presence of Diabets\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Gender\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Cross-Tabulation, Row Proportions  
+## Presence of Diabets * Gender  
+## Data Frame: diabetes  
+## 
+## --------------------- -------- ------------- ------------- --------------
+##                         Gender             0             1          Total
+##   Presence of Diabets                                                    
+##                     0             19 ( 9.5%)   181 (90.5%)   200 (100.0%)
+##                     1            173 (54.1%)   147 (45.9%)   320 (100.0%)
+##                 Total            192 (36.9%)   328 (63.1%)   520 (100.0%)
+## --------------------- -------- ------------- ------------- --------------
+\end{verbatim}
+
+\hypertarget{table-class-vs-polyuria}{%
+\subsubsection{Table class vs polyuria}\label{table-class-vs-polyuria}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ctable}\NormalTok{(diabetes}\SpecialCharTok{$}\NormalTok{class, diabetes}\SpecialCharTok{$}\NormalTok{polyuria,  }\AttributeTok{dnn =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Presence of Diabets\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Polyuria\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Cross-Tabulation, Row Proportions  
+## Presence of Diabets * Polyuria  
+## Data Frame: diabetes  
+## 
+## --------------------- ---------- ------------- ------------- --------------
+##                         Polyuria             0             1          Total
+##   Presence of Diabets                                                      
+##                     0              185 (92.5%)    15 ( 7.5%)   200 (100.0%)
+##                     1               77 (24.1%)   243 (75.9%)   320 (100.0%)
+##                 Total              262 (50.4%)   258 (49.6%)   520 (100.0%)
+## --------------------- ---------- ------------- ------------- --------------
+\end{verbatim}
+
+\hypertarget{table-class}{%
+\subsubsection{Table class}\label{table-class}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ctable}\NormalTok{(diabetes}\SpecialCharTok{$}\NormalTok{class, diabetes}\SpecialCharTok{$}\NormalTok{polydipsia,  }\AttributeTok{dnn =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Presence of Diabets\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Polydipsia\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Cross-Tabulation, Row Proportions  
+## Presence of Diabets * Polydipsia  
+## Data Frame: diabetes  
+## 
+## --------------------- ------------ ------------- ------------- --------------
+##                         Polydipsia             0             1          Total
+##   Presence of Diabets                                                        
+##                     0                192 (96.0%)     8 ( 4.0%)   200 (100.0%)
+##                     1                 95 (29.7%)   225 (70.3%)   320 (100.0%)
+##                 Total                287 (55.2%)   233 (44.8%)   520 (100.0%)
+## --------------------- ------------ ------------- ------------- --------------
+\end{verbatim}
+
+\hypertarget{table-class-vs-alopecia}{%
+\subsubsection{Table class vs alopecia}\label{table-class-vs-alopecia}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ctable}\NormalTok{(diabetes}\SpecialCharTok{$}\NormalTok{class, diabetes}\SpecialCharTok{$}\NormalTok{alopecia,  }\AttributeTok{dnn =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Presence of Diabets\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Alopecia\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Cross-Tabulation, Row Proportions  
+## Presence of Diabets * Alopecia  
+## Data Frame: diabetes  
+## 
+## --------------------- ---------- ------------- ------------- --------------
+##                         Alopecia             0             1          Total
+##   Presence of Diabets                                                      
+##                     0               99 (49.5%)   101 (50.5%)   200 (100.0%)
+##                     1              242 (75.6%)    78 (24.4%)   320 (100.0%)
+##                 Total              341 (65.6%)   179 (34.4%)   520 (100.0%)
+## --------------------- ---------- ------------- ------------- --------------
+\end{verbatim}
+
+\hypertarget{make-classifications}{%
+\subsection{Make classifications}\label{make-classifications}}
+
+\hypertarget{split-the-data-first}{%
+\subsubsection{Split the data first}\label{split-the-data-first}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{10}\NormalTok{)}
+\NormalTok{sample }\OtherTok{=} \FunctionTok{sample.split}\NormalTok{(diabetes}\SpecialCharTok{$}\NormalTok{class, }\AttributeTok{SplitRatio =} \FloatTok{0.7}\NormalTok{)}
+\NormalTok{train\_x }\OtherTok{=} \FunctionTok{subset}\NormalTok{(diabetes, sample }\SpecialCharTok{==}\NormalTok{ T)}
+\NormalTok{test\_x }\OtherTok{=} \FunctionTok{subset}\NormalTok{(diabetes, sample }\SpecialCharTok{==}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{logistic-regression}{%
+\subsubsection{Logistic Regression}\label{logistic-regression}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit.log }\OtherTok{=} \FunctionTok{glm}\NormalTok{(class}\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data =}\NormalTok{ train\_x, }\AttributeTok{family =} \StringTok{\textquotesingle{}binomial\textquotesingle{}}\NormalTok{)}
+\NormalTok{prob.log }\OtherTok{=} \FunctionTok{predict}\NormalTok{(fit.log, }\AttributeTok{type =} \StringTok{\textquotesingle{}response\textquotesingle{}}\NormalTok{, }\AttributeTok{newdata =}\NormalTok{ test\_x)}
+\NormalTok{pred.log }\OtherTok{=} \FunctionTok{ifelse}\NormalTok{(prob.log }\SpecialCharTok{\textgreater{}} \FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{as.factor}\NormalTok{()}
+\NormalTok{matrix.log }\OtherTok{=} \FunctionTok{confusionMatrix}\NormalTok{(pred.log, test\_x}\SpecialCharTok{$}\NormalTok{class)}
+\NormalTok{matrix.log}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  0  1
+##          0 53  7
+##          1  7 89
+##                                          
+##                Accuracy : 0.9103         
+##                  95% CI : (0.854, 0.9501)
+##     No Information Rate : 0.6154         
+##     P-Value [Acc > NIR] : <2e-16         
+##                                          
+##                   Kappa : 0.8104         
+##                                          
+##  Mcnemar's Test P-Value : 1              
+##                                          
+##             Sensitivity : 0.8833         
+##             Specificity : 0.9271         
+##          Pos Pred Value : 0.8833         
+##          Neg Pred Value : 0.9271         
+##              Prevalence : 0.3846         
+##          Detection Rate : 0.3397         
+##    Detection Prevalence : 0.3846         
+##       Balanced Accuracy : 0.9052         
+##                                          
+##        'Positive' Class : 0              
+## 
+\end{verbatim}
+
+\hypertarget{evaluating-logistic-regression-with-roc}{%
+\subsubsection{Evaluating Logistic Regression with
+ROC}\label{evaluating-logistic-regression-with-roc}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{roc}\NormalTok{(test\_x}\SpecialCharTok{$}\NormalTok{class, prob.log, }\AttributeTok{plot =}\NormalTok{ T, }\AttributeTok{legacy.axes =}\NormalTok{ T, }\AttributeTok{percent =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Setting levels: control = 0, case = 1
+\end{verbatim}
+
+\begin{verbatim}
+## Setting direction: controls < cases
+\end{verbatim}
+
+\includegraphics{Diabetes1_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{verbatim}
+## 
+## Call:
+## roc.default(response = test_x$class, predictor = prob.log, percent = T,     plot = T, legacy.axes = T)
+## 
+## Data: prob.log in 60 controls (test_x$class 0) < 96 cases (test_x$class 1).
+## Area under the curve: 96.88%
+\end{verbatim}
+
+\hypertarget{k-nn}{%
+\subsubsection{K-NN}\label{k-nn}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pred.knn }\OtherTok{=} \FunctionTok{knn}\NormalTok{(}\AttributeTok{train =}\NormalTok{ train\_x[, }\SpecialCharTok{{-}}\DecValTok{16}\NormalTok{],}
+               \AttributeTok{test =}\NormalTok{ test\_x[, }\SpecialCharTok{{-}}\DecValTok{16}\NormalTok{], }
+               \AttributeTok{cl =}\NormalTok{ train\_x[, }\DecValTok{16}\NormalTok{],}
+               \AttributeTok{k =} \DecValTok{3}\NormalTok{)}
+
+\NormalTok{matrix.knn }\OtherTok{=} \FunctionTok{confusionMatrix}\NormalTok{(pred.knn, test\_x}\SpecialCharTok{$}\NormalTok{class)}
+\NormalTok{matrix.knn}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  0  1
+##          0 59  8
+##          1  1 88
+##                                           
+##                Accuracy : 0.9423          
+##                  95% CI : (0.8933, 0.9733)
+##     No Information Rate : 0.6154          
+##     P-Value [Acc > NIR] : <2e-16          
+##                                           
+##                   Kappa : 0.8807          
+##                                           
+##  Mcnemar's Test P-Value : 0.0455          
+##                                           
+##             Sensitivity : 0.9833          
+##             Specificity : 0.9167          
+##          Pos Pred Value : 0.8806          
+##          Neg Pred Value : 0.9888          
+##              Prevalence : 0.3846          
+##          Detection Rate : 0.3782          
+##    Detection Prevalence : 0.4295          
+##       Balanced Accuracy : 0.9500          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\hypertarget{svm}{%
+\subsubsection{SVM}\label{svm}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit.svm }\OtherTok{=} \FunctionTok{svm}\NormalTok{(class }\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data =}\NormalTok{ train\_x, }\AttributeTok{type =} \StringTok{\textquotesingle{}C{-}classification\textquotesingle{}}\NormalTok{, }\AttributeTok{kernel =} \StringTok{\textquotesingle{}linear\textquotesingle{}}\NormalTok{, }\AttributeTok{probability =}\NormalTok{ T)}
+\NormalTok{pred.svm }\OtherTok{=} \FunctionTok{predict}\NormalTok{(fit.svm, }\AttributeTok{newdata =}\NormalTok{ test\_x)}
+\NormalTok{matrix.svm }\OtherTok{=} \FunctionTok{confusionMatrix}\NormalTok{(pred.svm, test\_x}\SpecialCharTok{$}\NormalTok{class)}
+\NormalTok{matrix.svm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  0  1
+##          0 55  5
+##          1  5 91
+##                                           
+##                Accuracy : 0.9359          
+##                  95% CI : (0.8853, 0.9688)
+##     No Information Rate : 0.6154          
+##     P-Value [Acc > NIR] : <2e-16          
+##                                           
+##                   Kappa : 0.8646          
+##                                           
+##  Mcnemar's Test P-Value : 1               
+##                                           
+##             Sensitivity : 0.9167          
+##             Specificity : 0.9479          
+##          Pos Pred Value : 0.9167          
+##          Neg Pred Value : 0.9479          
+##              Prevalence : 0.3846          
+##          Detection Rate : 0.3526          
+##    Detection Prevalence : 0.3846          
+##       Balanced Accuracy : 0.9323          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\hypertarget{svm-2}{%
+\subsubsection{SVM 2}\label{svm-2}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit.svm2 }\OtherTok{=} \FunctionTok{svm}\NormalTok{(class}\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data =}\NormalTok{ train\_x, }\AttributeTok{type =} \StringTok{\textquotesingle{}C{-}classification\textquotesingle{}}\NormalTok{, }\AttributeTok{kernel =} \StringTok{\textquotesingle{}radial\textquotesingle{}}\NormalTok{)}
+\NormalTok{pred.svm2 }\OtherTok{=} \FunctionTok{predict}\NormalTok{(fit.svm2, }\AttributeTok{newdata =}\NormalTok{ test\_x)}
+\NormalTok{matrix.svm2 }\OtherTok{=} \FunctionTok{confusionMatrix}\NormalTok{(pred.svm2, test\_x}\SpecialCharTok{$}\NormalTok{class)}
+\NormalTok{matrix.svm2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  0  1
+##          0 54  4
+##          1  6 92
+##                                           
+##                Accuracy : 0.9359          
+##                  95% CI : (0.8853, 0.9688)
+##     No Information Rate : 0.6154          
+##     P-Value [Acc > NIR] : <2e-16          
+##                                           
+##                   Kappa : 0.8637          
+##                                           
+##  Mcnemar's Test P-Value : 0.7518          
+##                                           
+##             Sensitivity : 0.9000          
+##             Specificity : 0.9583          
+##          Pos Pred Value : 0.9310          
+##          Neg Pred Value : 0.9388          
+##              Prevalence : 0.3846          
+##          Detection Rate : 0.3462          
+##    Detection Prevalence : 0.3718          
+##       Balanced Accuracy : 0.9292          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\hypertarget{naive-bayes}{%
+\subsubsection{Naive Bayes}\label{naive-bayes}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit.nb }\OtherTok{=} \FunctionTok{naiveBayes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ train\_x[, }\SpecialCharTok{{-}}\DecValTok{16}\NormalTok{], }
+                    \AttributeTok{y =}\NormalTok{ train\_x}\SpecialCharTok{$}\NormalTok{class)}
+\NormalTok{pred.nb }\OtherTok{=} \FunctionTok{predict}\NormalTok{(fit.nb, }\AttributeTok{newdata =}\NormalTok{ test\_x)}
+\NormalTok{matrix.nb }\OtherTok{=} \FunctionTok{confusionMatrix}\NormalTok{(pred.nb, test\_x}\SpecialCharTok{$}\NormalTok{class)}
+\NormalTok{matrix.nb}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  0  1
+##          0 55 15
+##          1  5 81
+##                                          
+##                Accuracy : 0.8718         
+##                  95% CI : (0.809, 0.9199)
+##     No Information Rate : 0.6154         
+##     P-Value [Acc > NIR] : 1.153e-12      
+##                                          
+##                   Kappa : 0.7374         
+##                                          
+##  Mcnemar's Test P-Value : 0.04417        
+##                                          
+##             Sensitivity : 0.9167         
+##             Specificity : 0.8438         
+##          Pos Pred Value : 0.7857         
+##          Neg Pred Value : 0.9419         
+##              Prevalence : 0.3846         
+##          Detection Rate : 0.3526         
+##    Detection Prevalence : 0.4487         
+##       Balanced Accuracy : 0.8802         
+##                                          
+##        'Positive' Class : 0              
+## 
+\end{verbatim}
+
+\hypertarget{decision-tree}{%
+\subsubsection{Decision Tree}\label{decision-tree}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit.dt }\OtherTok{=} \FunctionTok{rpart}\NormalTok{(class }\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data =}\NormalTok{ train\_x)}
+\NormalTok{pred.dt }\OtherTok{=} \FunctionTok{predict}\NormalTok{(fit.dt, }\AttributeTok{newdata =}\NormalTok{ test\_x, }\AttributeTok{type =} \StringTok{\textquotesingle{}class\textquotesingle{}}\NormalTok{)}
+\NormalTok{matrix.dt }\OtherTok{=} \FunctionTok{confusionMatrix}\NormalTok{(pred.dt, test\_x}\SpecialCharTok{$}\NormalTok{class)}
+\NormalTok{matrix.dt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  0  1
+##          0 55 13
+##          1  5 83
+##                                           
+##                Accuracy : 0.8846          
+##                  95% CI : (0.8238, 0.9302)
+##     No Information Rate : 0.6154          
+##     P-Value [Acc > NIR] : 5.739e-14       
+##                                           
+##                   Kappa : 0.7622          
+##                                           
+##  Mcnemar's Test P-Value : 0.09896         
+##                                           
+##             Sensitivity : 0.9167          
+##             Specificity : 0.8646          
+##          Pos Pred Value : 0.8088          
+##          Neg Pred Value : 0.9432          
+##              Prevalence : 0.3846          
+##          Detection Rate : 0.3526          
+##    Detection Prevalence : 0.4359          
+##       Balanced Accuracy : 0.8906          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\hypertarget{random-forest}{%
+\subsubsection{Random Forest}\label{random-forest}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{fit.rf }\OtherTok{=} \FunctionTok{randomForest}\NormalTok{(}\AttributeTok{x =}\NormalTok{ train\_x[, }\SpecialCharTok{{-}}\DecValTok{16}\NormalTok{], }\AttributeTok{y =}\NormalTok{ train\_x}\SpecialCharTok{$}\NormalTok{class, }\AttributeTok{ntree =} \DecValTok{50}\NormalTok{)}
+\NormalTok{pred.rf }\OtherTok{=} \FunctionTok{predict}\NormalTok{(fit.rf, }\AttributeTok{newdata =}\NormalTok{ test\_x)}
+\NormalTok{matrix.rf }\OtherTok{=} \FunctionTok{confusionMatrix}\NormalTok{(pred.rf, test\_x}\SpecialCharTok{$}\NormalTok{class)}
+\NormalTok{matrix.rf}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  0  1
+##          0 58  4
+##          1  2 92
+##                                           
+##                Accuracy : 0.9615          
+##                  95% CI : (0.9182, 0.9858)
+##     No Information Rate : 0.6154          
+##     P-Value [Acc > NIR] : <2e-16          
+##                                           
+##                   Kappa : 0.9193          
+##                                           
+##  Mcnemar's Test P-Value : 0.6831          
+##                                           
+##             Sensitivity : 0.9667          
+##             Specificity : 0.9583          
+##          Pos Pred Value : 0.9355          
+##          Neg Pred Value : 0.9787          
+##              Prevalence : 0.3846          
+##          Detection Rate : 0.3718          
+##    Detection Prevalence : 0.3974          
+##       Balanced Accuracy : 0.9625          
+##                                           
+##        'Positive' Class : 0               
+## 
+\end{verbatim}
+
+\end{document}

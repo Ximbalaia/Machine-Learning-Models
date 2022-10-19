@@ -1,0 +1,274 @@
+---
+title: "Classification Algorithms to Predict Diabetes"
+author: "João Victor"
+date: "2022-10-19"
+output:
+  html_document: default
+---
+
+This study is focused in predict if a person have diabetes or not, a disease that impact many people throughout the globe. In 2014, more than 8% of adults with 18 years old or aged had diabetes. In 2019, more than 1.5 millions people died with complications caused by diabetes, with a increase in mortality of 3% of mortality in 2020 (World Health Organization, 2022).  
+The early detection is essential to decrease possible severe symptoms. But the warning signs of diabetes can stay hidden to the patient because it is not simple your detection. Most common signs are: frequent urination, increased thirst, extreme fatigue, blurred vision, and weight loss. (Mclaren Health Care, 2020).  
+All these variable are included in the dataset, in addition with another ones.
+
+
+### Load the Libraries
+
+```{r}
+library(tidyverse)
+library(corrplot)
+library(summarytools)
+library(caTools)
+library(caret)
+library(e1071)
+library(class)
+library(rpart)
+library(randomForest)
+library(pROC)
+```
+
+### Load the dataset
+```{r}
+diabetes = read.csv('diabetes_data.csv', sep = ';')
+```
+
+### First of all let's analyze the structute of the dataset
+```{r}
+str(diabetes)
+```
+
+### Making the Correlation Matrix
+```{r}
+matrix = model.matrix(~0+., data = diabetes) %>% cor(use = 'all.obs')
+
+corrplot(matrix, method = 'shade',tl.col = 'black', tl.pos = 'lt', tl.cex = 0.8, cl.cex = 0.8, number.cex = 0.45, addCoef.col = T)
+```
+
+Excluding Age and Gender, all the variables have 0 or 1 values. So the "strong" number is 1.  
+First observation: as a person ages, is most common that this person have presence of a disease (actually some variables can not be considered a disease, but a condition).  
+Second observation: Most of the variables have a positive correlation with the presence of diabetes.  
+Furthermore it looks like is more common a female person have diabetes than a male person. This is valid for all the disease in the data set.  
+The three highest positive correlation with class is 'polyuria', 'polydipsia' and 'genderFemale'.  
+The two highest negative correlation with class is 'genderMale' and 'alopecia'. There is only one more variable with negative correlation, but your values is only -0.01. That variable is 'itching'.  
+
+
+#### Make all variables factor and exclude the Age variable.
+```{r}
+diabetes = diabetes %>% mutate(across(where(is.numeric), factor))
+diabetes$age = NULL
+```
+
+### Relevel gender column 
+```{r}
+diabetes$gender = factor(diabetes$gender, levels = c('Female', 'Male'), labels = c(0, 1))
+```
+
+## Tables  
+
+### Table class vs gender
+```{r}
+ctable(diabetes$class, diabetes$gender,  dnn = c('Presence of Diabets', 'Gender'))
+```
+
+
+### Table class vs polyuria
+```{r}
+ctable(diabetes$class, diabetes$polyuria,  dnn = c('Presence of Diabets', 'Polyuria'))
+```
+
+### Table class 
+```{r}
+ctable(diabetes$class, diabetes$polydipsia,  dnn = c('Presence of Diabets', 'Polydipsia'))
+```
+
+### Table class vs alopecia
+```{r}
+ctable(diabetes$class, diabetes$alopecia,  dnn = c('Presence of Diabets', 'Alopecia'))
+```
+## Methods of Evaluation
+#### ROC Curve
+The ROC curve is based on Sensitivity in your y-axis and 1 - Specificity in your x-axis, two parameter of evaluation from a model. The confusion matrix is an essential tool to calculate these parameters. Together with the Sensitivity and Specificity, the Accuracy of the model is another parameter to evaluate the model created.  
+
+But what is Accuracy, Sensitivity and Specificity? When a prediction is made, we need to know how many times the model predicted right and how many times the model predicted wrong.  
+
+**Example of a Confusion Matrix**  
+
+![](https://static.packt-cdn.com/products/9781838555078/graphics/C13314_06_05.jpg){ width=50% }  
+1. Top-left (True Negative):  How many times the model classified correctly a negative sample as negative -in the case of this data set the negative sample would be the not presence of diabetes in the patient-. So how many times the model predicted that a person didn't have diabetes and actually this person didn't have diabetes.  
+2. Bottom-left (False Negative): How many times the model classified incorrectly a positive sample as negative. So how many times the model predicted that a person didn't had diabetes but actually this person had diabetes.  
+3. Top-right (False Positive): How many times the model classified incorrectly a negative sample as positive. So how many times the model predicted that a person had diabetes but actually this person didn't had diabetes.  
+4. Bottom-right (True Positive): How many times the model classified correctly a positive sample as positive. So how many times the model predicted correctly that a person had diabetes.  
+With all that concepts in my mind, is time to calculate the Accuracy, Sensitivity and Specificity.  
+Accuracy: Measure that shows how many times the model predicted correctly. Your equation is: $$ACC=\frac{TP+TN}{TP+TN+FP+FN}$$  
+Sensitivity: Measures the % of the patients with disease who tested positive. Your equation is: $$SN=\frac{TP}{TP+FN}$$  
+Specificity: Measures the % of the patients without disease who testes negative. Your equation is: $$SP=\frac{TN}{TN+FP}$$  
+Along with these 3 measures, is possible to calculate the Positive Predicted Value (PPV) and Negative Predicted Value (NPV)  
+Positive Predicted Value: Measures the % of the patients who tested positive and have the disease. Your equation is: $$PPV=\frac{TP}{TP+FP}$$  
+Negative Predicted Value: Measures the % of the patients who tested negative and don't have disease. Your equation is: $$NPV=\frac{TN}{TN+FN}$$  
+
+After explain what's necessary to obtain the ROC graphic, it's time to explain what is this ROC.  
+Receive operating characteristic, or ROC is a method to make a diagnosis of the model. Your curve can be classified as a trade-off between Sensitivity and Specificity.  
+
+> To produce an ROC curve, the sensitivities and specificities for different values of a continuous test measure are first tabulated. This results, essentially, in a list of various test values and the corresponding sensitivity and specificity of the test at that value. Then, the graphical ROC curve is produced by plotting sensitivity (true positive rate) on the y-axis against 1–specificity (false positive rate) on the x-axis for the various values tabulated. (Hoo, Candlish and Teare, p. 357, 2017).  
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Roc_curve.svg/220px-Roc_curve.svg.png){ width=30% }
+
+The test measures is nothing but the threshold. The most common choice for a threshold is 0.5, so if the percentage falls between 0 and 0.5 this means that this predicted value is classified as 0. If the percentage is 0.51 or more this means that the predicted values is classified as 1.  
+Now let's imagine if the threshold chosen is 0. This means that every single prediction would be classified like positive for diabetes. The confusion matrix would have only True Positive and False Positive predictions. Throwing it in the equations, the Sensitivity and Specificity would give us the value of 1. For sure, although we would classify correctly all the patients who have diabetes, we would miss classify every patient who don't have diabetes. That's where lies the trade-off between these two measures. In addition, as the line grows to the top, the curve gets better.
+
+## Make classifications
+### Split the data first
+```{r}
+set.seed(9)
+sample = sample.split(diabetes$class, SplitRatio = 0.7)
+train_x = subset(diabetes, sample == T)
+test_x = subset(diabetes, sample == F)
+```
+
+### Logistic Regression
+```{r}
+fit.log = glm(class~., data = train_x, family = 'binomial')
+prob.log = predict(fit.log, type = 'response', newdata = test_x)
+pred.log = ifelse(prob.log > 0.5, 1, 0) %>% as.factor()
+matrix.log = table(test_x$class, pred.log)
+matrix.log
+```
+ 
+```{r}
+acc.log = (89+56)/(89+56+7+4)
+sn.log = 89/(89+7)
+sp.log = 56/(56+4)
+acc.log
+sn.log
+sp.log
+```
+The Logistic Regression model had an accuracy of 92.94%, sensitivity of 92.70% and specificity of 93.33%
+
+### Evaluating Logistic Regression with ROC
+```{r}
+roc(test_x$class, prob.log, plot = T, legacy.axes = T, percent = T)
+```
+
+
+### K-NN
+```{r}
+pred.knn = knn(train = train_x[, -16],
+               test = test_x[, -16], 
+               cl = train_x[, 16],
+               k = 3)
+
+matrix.knn = table(test_x$class, pred.knn)
+matrix.knn
+```
+
+```{r}
+acc.knn = (88+57)/(88+57+3+8)
+sn.knn = 88/(88+8)
+sp.knn = 57/(57+3)
+acc.knn
+sn.knn
+sp.knn
+```
+The K-NN model had an accuracy of 92.94%, sensitivity of 91.66% and specificity of 95%
+
+### SVM
+```{r}
+fit.svm = svm(class ~., data = train_x, type = 'C-classification', kernel = 'linear', probability = T)
+pred.svm = predict(fit.svm, newdata = test_x)
+matrix.svm = table(test_x$class, pred.svm)
+matrix.svm
+```
+
+```{r}
+acc.svm = (90+57)/(90+57+3+6)
+sn.svm = 90/(90+6)
+sp.svm = 57/(57+3)
+acc.svm
+sn.svm
+sp.svm
+```
+The SVM model had an accuracy of 94.23%, sensitivity of 93.75% and specificity of 95%
+
+### SVM 2
+```{r}
+fit.svm2 = svm(class~., data = train_x, type = 'C-classification', kernel = 'radial')
+pred.svm2 = predict(fit.svm2, newdata = test_x)
+matrix.svm2 = table(test_x$class, pred.svm2)
+matrix.svm2
+```
+
+```{r}
+acc.svm2 = (91+56)/(91+56+5+4)
+sn.svm2 = 91/(91+5)
+sp.svm2 = 56/(56+4)
+acc.svm2
+sn.svm2
+sp.svm2
+```
+The SVM model had an accuracy of 94.23%, sensitivity of 94.79% and specificity of 93.33%
+
+### Naive Bayes
+```{r}
+fit.nb = naiveBayes(x = train_x[, -16], 
+                    y = train_x$class)
+pred.nb = predict(fit.nb, newdata = test_x)
+matrix.nb = table(test_x$class, pred.nb)
+matrix.nb
+```
+
+```{r}
+acc.nb = (82+55)/(82+55+14+5)
+sn.nb = 82/(82+14)
+sp.nb = 55/(55+5)
+acc.nb
+sn.nb
+sp.nb
+```
+The Naive Bayes model had an accuracy of 87.82%, sensitivity of 85.41% and specificity of 91.66%
+
+### Decision Tree
+```{r}
+fit.dt = rpart(class ~., data = train_x)
+pred.dt = predict(fit.dt, newdata = test_x, type = 'class')
+matrix.dt = table(test_x$class, pred.dt)
+matrix.dt
+```
+
+```{r}
+acc.dt = (91+51)/(91+51+9+5)
+sn.dt = 91/(91+5)
+sp.dt = 51/(51+9)
+acc.dt
+sn.dt
+sp.dt
+```
+The Decision Tree model had an accuracy of 91.02%, sensitivity of 94.79% and specificity of 85%
+
+### Random Forest
+```{r}
+fit.rf = randomForest(x = train_x[, -16], y = train_x$class, ntree = 50)
+pred.rf = predict(fit.rf, newdata = test_x)
+matrix.rf = table(test_x$class, pred.rf)
+matrix.rf
+```
+
+```{r}
+acc.dt = (94+57)/(94+57+2+3)
+sn.dt = 94/(94+2)
+sp.dt = 57/(57+3)
+acc.dt
+sn.dt
+sp.dt
+```
+The Decision Tree model had an accuracy of 96.79%, sensitivity of 97.91% and specificity of 95%
+
+### References
+**World Health Organization.** (Website). accessed 19 October 2022. <https://www.who.int/news-room/fact-sheets/detail/diabetes>  
+**McLaren Health Case.** (Website). accessed 19 October 2022. <https://www.mclaren.org/lansing/news/early-diabetes-detection-can-prevent-serious-compl-3074>  
+**Buderer NM.** Statistical methodology: I. Incorporating the prevalence of disease into the sample size calculation for sensitivity and specificity. Acad Emerg Med. 1996 Sep;3(9):895-900. doi: 10.1111/j.1553-2712.1996.tb03538.x. PMID: 8870764.  
+**Hoo, ZH; Candlish, J; Teare, D.** Emerg. Med. J.; 2017;34:357–359.  
+**Islam M.M.F., Ferdousi R., Rahman S., Bushra H.Y.** (2020) Likelihood Prediction of Diabetes at Early Stage Using Data Mining Techniques. In: Gupta M., Konar D., Bhattacharyya S., Biswas S. (eds) Computer Vision and Machine Intelligence in Medical Image Analysis. Advances in Intelligent Systems and Computing, vol 992. Springer, Singapore. https://doi.org/10.1007/978-981-13-8798-2_12
+
+
+
+
+
